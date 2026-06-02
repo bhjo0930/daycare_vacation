@@ -582,36 +582,44 @@ export function VacationDashboard() {
             <h1 className="mt-1 text-2xl font-semibold tracking-normal sm:text-3xl">휴가 관리</h1>
           </div>
           <div className="grid grid-cols-2 items-center gap-2 sm:flex sm:flex-wrap">
-            <button
-              className="inline-flex h-10 min-w-0 items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium shadow-sm transition hover:bg-slate-50"
-              data-testid="export-excel"
-              onClick={exportExcel}
-              title="엑셀 저장"
-              type="button"
-            >
-              <Download size={16} />
-              엑셀 저장
-            </button>
-            <button
-              className="inline-flex h-10 min-w-0 items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium shadow-sm transition hover:bg-slate-50"
-              data-testid="logout-button"
-              onClick={() => setIsAuthenticated(false)}
-              title="로그아웃"
-              type="button"
-            >
-              <LogOut size={16} />
-              로그아웃
-            </button>
-            <button
-              className="inline-flex h-10 min-w-0 items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium shadow-sm transition hover:bg-slate-50"
-              data-testid="view-staff-management"
-              onClick={() => setActiveView((view) => (view === "staff" ? "vacations" : "staff"))}
-              title="직원 관리"
-              type="button"
-            >
-              <UsersRound size={16} />
-              {activeView === "staff" ? "휴가 관리" : "직원 관리"}
-            </button>
+            <div className="col-span-2 grid grid-cols-3 gap-2 sm:contents">
+              <button
+                className="inline-flex h-10 min-w-0 items-center justify-center gap-1.5 rounded-md border border-slate-200 bg-white px-2 text-sm font-medium shadow-sm transition hover:bg-slate-50 sm:gap-2 sm:px-3"
+                data-testid="export-excel"
+                onClick={exportExcel}
+                title="엑셀 저장"
+                type="button"
+              >
+                <Download size={16} />
+                <span className="sm:hidden">엑셀</span>
+                <span className="hidden sm:inline">엑셀 저장</span>
+              </button>
+              <button
+                className="inline-flex h-10 min-w-0 items-center justify-center gap-1.5 rounded-md border border-slate-200 bg-white px-2 text-sm font-medium shadow-sm transition hover:bg-slate-50 sm:gap-2 sm:px-3"
+                data-testid="view-staff-management"
+                onClick={() => setActiveView((view) => (view === "staff" ? "vacations" : "staff"))}
+                title="직원 관리"
+                type="button"
+              >
+                <UsersRound size={16} />
+                <span className="sm:hidden">
+                  {activeView === "staff" ? "휴가" : "직원관리"}
+                </span>
+                <span className="hidden sm:inline">
+                  {activeView === "staff" ? "휴가 관리" : "직원 관리"}
+                </span>
+              </button>
+              <button
+                className="inline-flex h-10 min-w-0 items-center justify-center gap-1.5 rounded-md border border-slate-200 bg-white px-2 text-sm font-medium shadow-sm transition hover:bg-slate-50 sm:gap-2 sm:px-3"
+                data-testid="logout-button"
+                onClick={() => setIsAuthenticated(false)}
+                title="로그아웃"
+                type="button"
+              >
+                <LogOut size={16} />
+                로그아웃
+              </button>
+            </div>
             <div className="col-span-2 grid grid-cols-[1fr_44px] gap-2 sm:contents">
               <button
                 className="inline-flex h-10 min-w-0 items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium shadow-sm transition hover:bg-slate-50"

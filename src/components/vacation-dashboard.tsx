@@ -576,14 +576,14 @@ export function VacationDashboard() {
   return (
     <main className="min-h-screen bg-[#f6f7f2] text-slate-950">
       <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-5 lg:flex-row lg:items-center lg:justify-between">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-3 py-4 sm:px-5 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <p className="text-sm font-medium text-emerald-700">어린이집 운영 관리</p>
-            <h1 className="mt-1 text-3xl font-semibold tracking-normal">휴가 관리</h1>
+            <h1 className="mt-1 text-2xl font-semibold tracking-normal sm:text-3xl">휴가 관리</h1>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="grid grid-cols-2 items-center gap-2 sm:flex sm:flex-wrap">
             <button
-              className="inline-flex h-10 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium shadow-sm transition hover:bg-slate-50"
+              className="inline-flex h-10 min-w-0 items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium shadow-sm transition hover:bg-slate-50"
               data-testid="export-excel"
               onClick={exportExcel}
               title="엑셀 저장"
@@ -593,7 +593,7 @@ export function VacationDashboard() {
               엑셀 저장
             </button>
             <button
-              className="inline-flex h-10 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium shadow-sm transition hover:bg-slate-50"
+              className="inline-flex h-10 min-w-0 items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium shadow-sm transition hover:bg-slate-50"
               data-testid="logout-button"
               onClick={() => setIsAuthenticated(false)}
               title="로그아웃"
@@ -603,7 +603,7 @@ export function VacationDashboard() {
               로그아웃
             </button>
             <button
-              className="inline-flex h-10 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium shadow-sm transition hover:bg-slate-50"
+              className="inline-flex h-10 min-w-0 items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium shadow-sm transition hover:bg-slate-50"
               data-testid="view-staff-management"
               onClick={() => setActiveView((view) => (view === "staff" ? "vacations" : "staff"))}
               title="직원 관리"
@@ -612,27 +612,29 @@ export function VacationDashboard() {
               <UsersRound size={16} />
               {activeView === "staff" ? "휴가 관리" : "직원 관리"}
             </button>
+            <div className="col-span-2 grid grid-cols-[1fr_44px] gap-2 sm:contents">
+              <button
+                className="inline-flex h-10 min-w-0 items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium shadow-sm transition hover:bg-slate-50"
+                data-testid="previous-month"
+                onClick={() => moveMonth(-1)}
+                title="이전 달"
+                type="button"
+              >
+                <ChevronLeft size={16} />
+                {formatMonthLabel(currentMonth)}
+              </button>
+              <button
+                className="inline-flex h-10 min-w-0 items-center justify-center rounded-md border border-slate-200 bg-white px-3 shadow-sm transition hover:bg-slate-50 sm:size-10 sm:px-0"
+                data-testid="next-month"
+                onClick={() => moveMonth(1)}
+                title="다음 달"
+                type="button"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
             <button
-              className="inline-flex h-10 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium shadow-sm transition hover:bg-slate-50"
-              data-testid="previous-month"
-              onClick={() => moveMonth(-1)}
-              title="이전 달"
-              type="button"
-            >
-              <ChevronLeft size={16} />
-              {formatMonthLabel(currentMonth)}
-            </button>
-            <button
-              className="inline-flex size-10 items-center justify-center rounded-md border border-slate-200 bg-white shadow-sm transition hover:bg-slate-50"
-              data-testid="next-month"
-              onClick={() => moveMonth(1)}
-              title="다음 달"
-              type="button"
-            >
-              <ChevronRight size={16} />
-            </button>
-            <button
-              className="inline-flex h-10 items-center gap-2 rounded-md bg-slate-950 px-4 text-sm font-medium text-white shadow-sm transition hover:bg-slate-800"
+              className="col-span-2 inline-flex h-10 min-w-0 items-center justify-center gap-2 rounded-md bg-slate-950 px-4 text-sm font-medium text-white shadow-sm transition hover:bg-slate-800 sm:col-span-1"
               data-testid="add-request-shortcut"
               onClick={focusRequestForm}
               title="휴가 일정 등록"
@@ -648,7 +650,7 @@ export function VacationDashboard() {
       {toast ? (
         <div
           aria-live="polite"
-          className="fixed bottom-5 right-5 z-50 rounded-md border border-emerald-200 bg-white px-4 py-3 text-sm font-semibold text-emerald-800 shadow-lg"
+          className="fixed inset-x-3 bottom-4 z-50 rounded-md border border-emerald-200 bg-white px-4 py-3 text-center text-sm font-semibold text-emerald-800 shadow-lg sm:inset-x-auto sm:right-5 sm:text-left"
           key={toast.id}
         >
           {toast.message}
@@ -673,10 +675,10 @@ export function VacationDashboard() {
       ) : null}
 
       {activeView === "vacations" ? (
-      <section className="mx-auto grid max-w-7xl gap-5 px-5 py-5 xl:grid-cols-[minmax(0,1fr)_380px]">
+      <section className="mx-auto grid max-w-7xl gap-4 px-3 py-4 sm:gap-5 sm:px-5 sm:py-5 xl:grid-cols-[minmax(0,1fr)_380px]">
         <div className="space-y-5">
-          <section className="rounded-lg border border-slate-200 bg-white">
-            <div className="flex flex-col gap-4 border-b border-slate-200 p-4 lg:flex-row lg:items-center lg:justify-between">
+          <section className="overflow-hidden rounded-lg border border-slate-200 bg-white">
+            <div className="flex flex-col gap-4 border-b border-slate-200 p-3 sm:p-4 lg:flex-row lg:items-center lg:justify-between">
               <div>
                 <h2 className="text-lg font-semibold">월간 휴가 현황</h2>
                 <p className="text-sm text-slate-500">등록된 휴가 일정을 월별로 확인합니다.</p>
@@ -685,7 +687,7 @@ export function VacationDashboard() {
                 <label className="relative">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
                   <input
-                    className="h-10 w-full rounded-md border border-slate-200 bg-white pl-9 pr-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 sm:w-64"
+                    className="h-10 w-full rounded-md border border-slate-200 bg-white pl-9 pr-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 lg:w-64"
                     placeholder="직원, 직책, 반 검색"
                     value={query}
                     onChange={(event) => setQuery(event.target.value)}
@@ -705,7 +707,7 @@ export function VacationDashboard() {
 
             <div className="grid grid-cols-7 border-b border-slate-200 bg-slate-50 text-center text-xs font-medium text-slate-500">
               {["일", "월", "화", "수", "목", "금", "토"].map((day) => (
-                <div className="px-2 py-3" key={day}>
+                <div className="px-1 py-2 sm:px-2 sm:py-3" key={day}>
                   {day}
                 </div>
               ))}
@@ -717,7 +719,7 @@ export function VacationDashboard() {
                   return (
                     <div
                       aria-hidden="true"
-                      className="min-h-28 border-b border-r border-slate-100 bg-slate-50/50 p-2"
+                      className="min-h-20 border-b border-r border-slate-100 bg-slate-50/50 p-1 sm:min-h-28 sm:p-2"
                       key={`blank-${index}`}
                     />
                   );
@@ -730,7 +732,7 @@ export function VacationDashboard() {
 
                 return (
                   <div
-                    className="min-h-28 cursor-pointer border-b border-r border-slate-100 p-2 text-left transition hover:bg-emerald-50/40 last:border-r-0 focus-within:bg-emerald-50/40"
+                    className="min-h-20 cursor-pointer overflow-hidden border-b border-r border-slate-100 p-1 text-left transition hover:bg-emerald-50/40 last:border-r-0 focus-within:bg-emerald-50/40 sm:min-h-28 sm:p-2"
                     data-testid={`calendar-day-${date}`}
                     key={date}
                     onClick={() => prepareVacationOnDate(date)}
@@ -744,13 +746,15 @@ export function VacationDashboard() {
                     tabIndex={0}
                     title={`${date} 휴가 등록`}
                   >
-                    <div className="mb-2 text-sm font-medium text-slate-700">{day}</div>
-                    <div className="space-y-1">
+                    <div className="mb-1 text-xs font-semibold text-slate-700 sm:mb-2 sm:text-sm">
+                      {day}
+                    </div>
+                    <div className="space-y-0.5 sm:space-y-1">
                       {dayRequests.map((request) => {
                         const staff = getStaff(request.staffId, staffList);
                         return (
                           <button
-                            className={`block w-full truncate rounded border px-2 py-1 text-left text-xs ${leaveTypeStyles[request.type]}`}
+                            className={`block w-full truncate rounded border px-1 py-0.5 text-left text-[10px] leading-tight sm:px-2 sm:py-1 sm:text-xs ${leaveTypeStyles[request.type]}`}
                             data-testid={`calendar-event-${request.id}`}
                             key={request.id}
                             onClick={(event) => {
@@ -776,7 +780,52 @@ export function VacationDashboard() {
               <h2 className="text-lg font-semibold">휴가 사용 현황</h2>
               <p className="text-sm text-slate-500">보고 있는 월과 누적 사용량을 빠르게 확인합니다.</p>
             </div>
-            <div className="overflow-x-auto">
+            <div className="divide-y divide-slate-100 md:hidden">
+              {visibleStaff.map((staff) => {
+                const status = statusRows.find((row) => row.id === staff.id);
+                const usedDays = status?.totalUsedDays ?? staff.usedDays;
+                const remaining = status?.remainingDays ?? staff.annualAllowance - usedDays;
+                const monthlyUsedDays = status?.monthlyRegisteredDays ?? 0;
+                const usedRate = Math.min(100, Math.round(status?.usageRate ?? 0));
+
+                return (
+                  <div className="px-4 py-3" key={staff.id}>
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="truncate font-semibold">{staff.name}</div>
+                        <div className="mt-0.5 text-xs text-slate-500">
+                          {staff.role} · {staff.classroom}
+                        </div>
+                      </div>
+                      <div className="shrink-0 text-right">
+                        <div className="text-sm font-semibold text-emerald-700">
+                          {monthlyUsedDays}일
+                        </div>
+                        <div className="text-xs text-slate-500">{formatMonthLabel(currentMonth)}</div>
+                      </div>
+                    </div>
+                    <div className="mt-3 grid grid-cols-3 gap-2 text-sm">
+                      <div>
+                        <div className="text-xs text-slate-500">총 사용</div>
+                        <div className="font-semibold">{usedDays}일</div>
+                      </div>
+                      <div>
+                        <div className="text-xs text-slate-500">잔여</div>
+                        <div className="font-semibold">{remaining}일</div>
+                      </div>
+                      <div>
+                        <div className="text-xs text-slate-500">소진율</div>
+                        <div className="font-semibold">{usedRate}%</div>
+                      </div>
+                    </div>
+                    <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-100">
+                      <div className="h-full rounded-full bg-emerald-500" style={{ width: `${usedRate}%` }} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="hidden overflow-x-auto md:block">
               <table className="w-full min-w-[820px] text-left text-sm">
                 <thead className="bg-slate-50 text-xs font-semibold uppercase text-slate-500">
                   <tr>
@@ -794,7 +843,7 @@ export function VacationDashboard() {
                     const usedDays = status?.totalUsedDays ?? staff.usedDays;
                     const remaining = status?.remainingDays ?? staff.annualAllowance - usedDays;
                     const monthlyUsedDays = status?.monthlyRegisteredDays ?? 0;
-                    const usedRate = Math.round((status?.usageRate ?? 0));
+                    const usedRate = Math.min(100, Math.round(status?.usageRate ?? 0));
                     return (
                       <tr key={staff.id}>
                         <td className="px-4 py-4">
@@ -849,7 +898,7 @@ export function VacationDashboard() {
                   ))}
                 </select>
               </Field>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <Field label="종류">
                   <select
                     className="input"
@@ -876,7 +925,7 @@ export function VacationDashboard() {
                   />
                 </Field>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <Field label="시작일">
                   <input
                     className="input"
@@ -983,13 +1032,50 @@ function StaffManagement({
   setStaffForm: (staffForm: StaffFormState) => void;
 }) {
   return (
-    <section className="mx-auto grid max-w-7xl gap-5 px-5 pb-8 xl:grid-cols-[minmax(0,1fr)_380px]">
+    <section className="mx-auto grid max-w-7xl gap-4 px-3 py-4 sm:gap-5 sm:px-5 sm:py-5 xl:grid-cols-[minmax(0,1fr)_380px]">
       <div className="rounded-lg border border-slate-200 bg-white">
         <div className="border-b border-slate-200 p-4">
           <h2 className="text-lg font-semibold">직원 관리</h2>
           <p className="text-sm text-slate-500">직원 정보를 등록하고 변경합니다.</p>
         </div>
-        <div className="overflow-x-auto">
+        <div className="divide-y divide-slate-100 md:hidden">
+          {staffList.map((staff) => (
+            <div className="px-4 py-3" data-testid={`mobile-staff-row-${staff.id}`} key={staff.id}>
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="truncate font-semibold">{staff.name}</div>
+                  <div className="mt-0.5 text-xs text-slate-500">
+                    {staff.role} · {staff.classroom}
+                  </div>
+                </div>
+                <div className="shrink-0 text-right text-sm">
+                  <div className="font-semibold">{staff.annualAllowance}일</div>
+                  <div className="text-xs text-slate-500">기존 {staff.usedDays}일</div>
+                </div>
+              </div>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                <button
+                  className="inline-flex h-9 items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium transition hover:bg-slate-50"
+                  data-testid={`mobile-edit-staff-${staff.id}`}
+                  onClick={() => onEdit(staff)}
+                  type="button"
+                >
+                  수정
+                </button>
+                <button
+                  className="inline-flex h-9 items-center justify-center gap-2 rounded-md border border-rose-200 bg-white px-3 text-sm font-medium text-rose-700 transition hover:bg-rose-50 disabled:cursor-not-allowed disabled:opacity-40"
+                  data-testid={`mobile-delete-staff-${staff.id}`}
+                  disabled={staffList.length <= 1}
+                  onClick={() => onDelete(staff.id)}
+                  type="button"
+                >
+                  삭제
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="hidden overflow-x-auto md:block">
           <table className="w-full min-w-[780px] text-left text-sm">
             <thead className="bg-slate-50 text-xs font-semibold uppercase text-slate-500">
               <tr>
@@ -1020,7 +1106,7 @@ function StaffManagement({
                         수정
                       </button>
                       <button
-                        className="inline-flex h-9 items-center justify-center gap-2 rounded-md border border-rose-200 bg-white px-3 text-sm font-medium text-rose-700 transition hover:bg-rose-50"
+                        className="inline-flex h-9 items-center justify-center gap-2 rounded-md border border-rose-200 bg-white px-3 text-sm font-medium text-rose-700 transition hover:bg-rose-50 disabled:cursor-not-allowed disabled:opacity-40"
                         data-testid={`delete-staff-${staff.id}`}
                         disabled={staffList.length <= 1}
                         onClick={() => onDelete(staff.id)}
@@ -1074,7 +1160,7 @@ function StaffManagement({
               onChange={(event) => setStaffForm({ ...staffForm, classroom: event.target.value })}
             />
           </Field>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <Field label="연차 한도">
               <input
                 className="input"
@@ -1100,7 +1186,7 @@ function StaffManagement({
               />
             </Field>
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             <button
               className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-emerald-600 px-4 text-sm font-semibold text-white transition hover:bg-emerald-700"
               data-testid="save-staff"
